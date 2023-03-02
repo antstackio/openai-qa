@@ -1,5 +1,7 @@
 import os
 import boto3
+import json
+import base64
 import openai
 from openai.embeddings_utils import distances_from_embeddings, cosine_similarity
 import pandas as pd
@@ -11,7 +13,7 @@ ssm = boto3.client('ssm')
 # OPENAI_API_KEY = ssm.get_parameter(Name='OPENAI_API_KEY', WithDecryption=True)['Parameter']['Value']
 openai.api_key = ssm.get_parameter(Name='OPENAI_API_KEY', WithDecryption=True)['Parameter']['Value']
 
-df = pd.read_pickle('embeddings.pkl')
+df = pd.read_pickle('/opt/ml/embeddings.pkl')
 
 def create_context(
     question, df, max_len=1800, size="ada"
@@ -88,8 +90,15 @@ def answer_question(
         return ""
         
 def lambda_handler(event, context):
-    print(df.head())
-    # prompt = event["prompt"]
-    # response = answer_question(df, question=prompt, debug=False)
+    body = (event["body"])
+    if isinstance(body, str):
+        body = json.loads(base64.b64decode(body))
+    prompt = body["prompt"]
+    response = answer_question(df, question=prompt, debug=False)
     
-    # return response
+    return {
+        "statusCode": 200,
+        "body": json.dumps({
+            "response": response
+        })
+    }
