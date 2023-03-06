@@ -50,7 +50,7 @@ def create_context(
 
 def answer_question(
     df,
-    model="text-davinci-003",
+    model="gpt-3.5-turbo",
     question="What is AntStack?",
     max_len=1800,
     size="ada",
@@ -74,8 +74,7 @@ def answer_question(
 
     try:
         # Create a completions using the question and context
-        response = openai.Completion.create(
-            prompt=f"You are a chatbot for the company AntStack and answer the question based on the context below, and if the question can't be answered based on the context, say \"I'm sorry I cannot answer the question, contact connect@antstack.com\"\n\nContext: {context}\n\n---\n\nQuestion: {question}\nAnswer:",
+        response = openai.ChatCompletion.create(
             temperature=0,
             max_tokens=max_tokens,
             top_p=1,
@@ -83,8 +82,11 @@ def answer_question(
             presence_penalty=0,
             stop=stop_sequence,
             model=model,
+            messages = [
+                {"role": "system", "content": f"You are a chatbot for a Serverless company AntStack and strictly answer the question based on the context below, and if the question can't be answered based on the context, say \"I'm sorry I cannot answer the question, contact connect@antstack.com\"\n\nContext: {context}\n\n---\n\nQuestion: {question}\nAnswer:"},
+            ]
         )
-        return response["choices"][0]["text"].strip()
+        return response["choices"][0]["message"]["content"]
     except Exception as e:
         print(e)
         return ""
