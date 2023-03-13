@@ -1,10 +1,9 @@
 # openai-qa
 
-This project contains source code and supporting files for a serverless application for classifying handwritten digits using a Machine Learning model in [Tensorflow](https://www.tensorflow.org/). It includes the following files and folders:
+This project contains source code and supporting files for a serverless application for a QA Application On the AntStack's website using OpenAI's [Chat Completion](https://platform.openai.com/docs/api-reference/chat/create) model. It includes the following files and folders:
 
 - app/app.py - Code for the application's Lambda function including the code for ML inferencing.
 - app/Dockerfile - The Dockerfile to build the container image.
-- app/model - A simple Tensorflow model for classifying handwritten digits trained against the MNIST dataset.
 - app/requirements.txt - The pip requirements to be installed during the container build.
 - events - Invocation events that you can use to invoke the function.
 - template.yaml - A template that defines the application's AWS resources.
@@ -72,7 +71,7 @@ The SAM CLI reads the application template to determine the API's routes and the
         Inference:
           Type: Api
           Properties:
-            Path: /classify_digit
+            Path: /answer
             Method: post
 ```
 
