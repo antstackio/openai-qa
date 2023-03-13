@@ -8,6 +8,10 @@ Globals:
   Api:
     BinaryMediaTypes:
       - application/json
+    Cors:
+      AllowOrigin: "'*'"
+      AllowHeaders: "'*'"
+      AllowMethods: "'*'"
 
 Resources:
   InferenceFunction:
