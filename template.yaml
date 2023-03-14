@@ -47,7 +47,7 @@ Resources:
         IntegrationResponses:
           - StatusCode: 200
             ResponseParameters:
-              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Headers: "'*'"
               method.response.header.Access-Control-Allow-Methods: "'POST,OPTIONS'"
               method.response.header.Access-Control-Allow-Origin: "'*'"
       MethodResponses:
@@ -60,7 +60,7 @@ Resources:
     Type: AWS::ApiGateway::Resource
     Properties:
       ParentId: !GetAtt ServerlessRestApi.RootResourceId
-      PathPart: "answer"
+      PathPart: "infanswer"
       RestApiId: !Ref ServerlessRestApi
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
