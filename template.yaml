@@ -23,77 +23,37 @@ Resources:
         ExposeHeaders: "'*'"
       # Add a definition body to handle CORS preflight requests
       DefinitionBody:
-        openapi: 3.0
+        openapi: 3.0.1
+        servers:
+          variables:
+            stage:
+              default: !Ref StageName
         info:
           title: !Sub "${AWS::StackName}"
           version: '1.0'
         paths:
           /answer:
-            options:
-              consumes:
-                - application/json
-              produces:
-                - application/json
-              responses:
-                '200':
-                  description: OK
-                  content:
-                    application/json:
-                      schema:
-                        $ref: "#/definitions/Empty"
-                      headers:
-                        Access-Control-Allow-Origin:
-                          type: string
-                        Access-Control-Allow-Methods:
-                          type: string
-                        Access-Control-Allow-Headers:
-                          type: string
-              x-amazon-apigateway-integration:
-                type: mock
-                requestTemplates:
-                  application/json: |
-                    {
-                      "statusCode" : 200
-                    }
-                responses:
-                  default:
-                    statusCode: "200"
-                    responseParameters:
-                      method.response.header.Access-Control-Allow-Methods: "'POST,OPTIONS'"
-                      method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
-                      method.response.header.Access-Control-Allow-Origin: "'*'"
-                    passThroughBehavior: when_no_match
             post:
-              consumes:
-                - application/json
-              produces:
-                - application/json
               responses:
-                '200':
-                  description: OK
-                  content:
-                    application/json:
-                      schema:
-                        $ref: "#/definitions/Empty"
-                      headers:
-                        Access-Control-Allow-Origin:
-                          type: string
-                        Access-Control-Allow-Methods:
-                          type: string
-                        Access-Control-Allow-Headers:
-                          type: string
+                default:
+                  description: "Default response for POST /answer"
               x-amazon-apigateway-integration:
-                type: aws_proxy
-                httpMethod: POST
+                payloadFormatVersion: "2.0"
+                type: "aws_proxy"
+                httpMethod: "POST"
                 uri: !Sub "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${InferenceFunction.Arn}/invocations"
-                responses:
-                  default:
-                    statusCode: "200"
-                    responseParameters:
-                      method.response.header.Access-Control-Allow-Methods: "'POST,OPTIONS'"
-                      method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
-                      method.response.header.Access-Control-Allow-Origin: "'*'"
-                    passThroughBehavior: when_no_match      
+                connectionType: "INTERNET"
+              x-amazon-apigateway-cors:
+                allowMethods:
+                - "*"
+                allowHeaders:
+                - "*"
+                exposeHeaders:
+                - "*"
+                maxAge: 0
+                allowCredentials: false
+                allowOrigins:
+                - "*"
   InferenceFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
