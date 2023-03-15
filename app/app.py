@@ -92,18 +92,18 @@ def answer_question(
         return ""
         
 def lambda_handler(event, context):
-    body = (event["body"])
-    if isinstance(body, str):
-        body = json.loads(base64.b64decode(body))
+    body = json.loads(event["body"])
     prompt = body["prompt"]
     response = answer_question(df, question=prompt, debug=False)
     
     return {
         "statusCode": 200,
         "headers": {
+            "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Headers": "*",
-            "Access-Control-Allow-Methods": "*"
+            "Access-Control-Allow-Methods": "*",
+            "Access-Control-Allow-Credentials": True
         },
         "body": json.dumps({
             "response": response
