@@ -8,6 +8,7 @@ openai.api_key = ssm.get_parameter(Name='OPENAI_API_KEY', WithDecryption=True)['
 pinecone_key = ssm.get_parameter(Name='PINECONE_KEY', WithDecryption=True)['Parameter']['Value']
 pinecone_env = ssm.get_parameter(Name='PINECONE_ENV', WithDecryption=True)['Parameter']['Value']
 
+pinecone.init(api_key=pinecone_key, environment=pinecone_env)
 index = pinecone.Index('openai')
 
 def create_context(
