@@ -1,0 +1,116 @@
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans&display=swap");
+
+.bot-app{
+  border: 1px solid rgb(0, 0, 0,0.1);
+  height: 530px;
+  width: 350px;
+  position: fixed;
+  bottom: 15px;
+  right: 20px;
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
+  background: rgb(234, 238, 243);
+  box-shadow: 0px 3.2px 5px 4px rgb(0,0,0,0.1);
+  padding: 5px 5px;
+  box-sizing: border-box;
+  font-family: 'Work Sans';
+}
+.bot-app .initial-message{
+  display: flex;
+  gap: 10px;
+  box-sizing: border-box;
+}
+.initial-message .logo{
+  border-radius: 50%;
+  background-color: #3263f3;
+  border: none;
+  width: 60px;
+  height: 30px;
+  text-align: center;
+  padding-top: 3px;
+  color: white;
+  font-size: 18px;
+  margin-top: 20px;
+}
+.initial-message .message{
+  padding: 6px 8px;
+  font-size: 14px;
+  box-sizing: border-box;
+  border: 1px solid rgb(255,255,255,0.1);
+  background-color: white;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+.input-question{
+  position: absolute;
+  bottom: 5px;
+  display: flex;
+  width: 100%;
+
+}
+.input-question .question-input{
+  width: 100%;
+  height: 40px;
+  padding: 0px 10px;
+  font-size: 16px;
+  border: 1px solid rgb(0, 0, 0,0.1);
+  border-radius: 10px;
+  outline: none;
+  font-family: 'Work Sans';
+}
+.input-question button{
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  height: 40px;
+  padding-top: 4px;
+  margin-left: 0px;
+  margin-right: 10px;
+}
+.msg-dialogue{
+  overflow-y: scroll;
+  height: 394px;
+  margin-bottom: 14px;
+}
+
+.msg-dialogue div{
+  padding: 6px 8px;
+  font-size: 14px;
+  width: 200px;
+  box-sizing: border-box;
+  font-family: 'Work Sans';
+  border: 1px solid rgb(255,255,255,0.1);
+  margin-top: 10px;
+  background-color: white;
+  border-radius: 15px;
+}
+.msg-dialogue .right{
+  float: right;
+  border-bottom-right-radius: 0px;
+
+}
+
+.msg-dialogue .left{
+  float: left;
+  border-bottom-left-radius: 0px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.loader {
+  border: 3px solid #f3f3f3!important; /* Light grey */
+  border-top: 3px solid #3498db !important; /* Blue */
+  border-radius: 50% !important;
+  width: 15px !important;
+  height: 15px !important;
+  animation: spin 2s linear infinite;
+  text-align: center!important;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
