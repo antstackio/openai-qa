@@ -21,7 +21,7 @@ const App = () => {
     }
 
     try {
-      const response = await axios.post('https://API.execute-api.REGION.amazonaws.com/STAGE/ENDPOINT',data)
+      const response = await axios.post('https://API.execute-api.REGION.amazonaws.com/STAGE/PATH',data)
       setBtnActive(false)
       const formattedResponse = {
         text: response.data.response,
