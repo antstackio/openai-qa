@@ -43,7 +43,7 @@ const App = () => {
     <div className="bot-app">
       <div className='initial-message'>
         <p className='logo'>A</p>
-        <p className='message'>Hello i am a chat bot &#x1F44B;, here to help you to know about Antstack &#x2764;&#xFE0F;</p>
+        <p className='message'>Hello &#x1F44B; I am a chat bot, here to help you to know about Antstack &#x2764;&#xFE0F;</p>
       </div>
       <div className='msg-dialogue' id = 'msg'>
         {
