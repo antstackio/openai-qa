@@ -44,9 +44,7 @@ def create_context(
 def answer_question(
     model="gpt-3.5-turbo",
     question="What is AntStack?",
-    debug=False,
     max_tokens=150,
-    stop_sequence=None
 ):
     """
     Answer a question based on the most similar context from pinecone
@@ -54,10 +52,6 @@ def answer_question(
     context = create_context(
         question,
     )
-    # If debug, print the raw model response
-    if debug:
-        print("Context:\n" + context)
-        print("\n\n")
 
     try:
         # Create a completions using the question and context
@@ -67,7 +61,6 @@ def answer_question(
             top_p=1,
             frequency_penalty=0,
             presence_penalty=0,
-            stop=stop_sequence,
             model=model,
             messages = [
                 {"role": "system", "content": f"You are a chatbot for a Serverless company AntStack and strictly answer the question based on the context below, and if the question can't be answered based on the context, say \"I'm sorry I cannot answer the question, contact connect@antstack.com\"\n\nContext: {context}\n\n---\n\nQuestion: {question}\nAnswer:"},
