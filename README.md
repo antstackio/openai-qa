@@ -1,5 +1,7 @@
 # openai-qa
 
+Blog: https://www.antstack.com/blog/open-ai-embeddings-gpt-3-5-pinecone-and-aws-lambda-building-a-serverless-qa-chatbot/
+
 This project contains source code and supporting files for a serverless application for a QA Application On the AntStack's website using OpenAI's [Chat Completion](https://platform.openai.com/docs/api-reference/chat/create) model. It includes the following files and folders:
 
 - app/app.py - Code for the application's Lambda function including the code for ML inferencing.
